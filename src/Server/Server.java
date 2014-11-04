@@ -23,9 +23,9 @@ public class Server extends Thread{
                 try {
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                     System.out.println(out);
-                    out.println("bienvenu sur le port :"+listener.getLocalPort());
+                    out.println("Bienvenue sur le port :"+listener.getLocalPort());
                     
-                    System.out.println("connection etablie");
+                    System.out.println("Connexion etablie");
                     
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String reponse;
@@ -38,7 +38,7 @@ public class Server extends Thread{
                     
                 }
                 catch (IOException e){
-                    System.err.println("connection terminee"+e.getMessage());
+                    System.err.println("Connexion terminee"+e.getMessage());
                     
                 }
                 finally {

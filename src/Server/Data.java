@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Data {
 
-    private Map<String,ArrayList<String>> assossiations;
+    private Map<String,ArrayList<String>> associations;
 
 
 }
