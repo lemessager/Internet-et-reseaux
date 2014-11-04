@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Requete {
 
-    TypeDeRequette typeDeRequette;
+    TypeDeRequete typeDeRequete;
     ArrayList<String> liste;
-    public Requete (TypeDeRequette tdr,ArrayList<String> l){
-        typeDeRequette=tdr;
+    public Requete (TypeDeRequete tdr,ArrayList<String> l){
+        typeDeRequete =tdr;
         liste = l;
     }
     
