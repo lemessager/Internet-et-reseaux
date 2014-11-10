@@ -30,6 +30,7 @@ public class Data {
 
     public String list() {
         StringBuilder sb = new StringBuilder("");
+        String newline = System.getProperty("line.separator");
         String name;
         Set keys = associations.keySet();
         Iterator it = keys.iterator();
@@ -37,13 +38,13 @@ public class Data {
             name=(String)it.next();
             sb.append("Surnoms associés à ");
             sb.append(name);
-            sb.append(" : \n");
+            sb.append(" : "+newline);
             for (String surname : associations.get(name)) {
                 sb.append("-");
                 sb.append(surname);
-                sb.append("\n");
+                sb.append(newline);
             }
-            sb.append("\n");
+            sb.append(newline);
         }
         return sb.toString();
     }

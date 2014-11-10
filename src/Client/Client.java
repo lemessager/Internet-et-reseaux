@@ -35,7 +35,6 @@ public class Client {
             out.println(message);
             while ((line=input.readLine()) != null) {
                 System.out.println("itération");
-                answer += line + "\n";
                 System.out.println(line);
 
             }
