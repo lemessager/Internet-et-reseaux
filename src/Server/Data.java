@@ -51,12 +51,4 @@ public class Data {
     public HashMap<String,ArrayList<String>> getAssociations() {
         return new HashMap<String, ArrayList<String>>(associations);
     }
-
-    public static void main(String[] args) {
-        Data data = new Data();
-        data.add("Riana", "Riri");
-        data.add("Riana", "Franky");
-        data.add("Claquin", "DawierDone");
-        System.out.println(data.list());
-    }
 }
