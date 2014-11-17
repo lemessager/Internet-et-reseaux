@@ -6,6 +6,7 @@ import Requettes.TypeDeRequete;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.Clock;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -32,7 +33,7 @@ public class Client {
 
     public String getAddress (){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Veuillez saisir un mot :");
+        System.out.println("Veuillez saisir IP :");
         String str = sc.nextLine();
         return str;
 
@@ -41,12 +42,13 @@ public class Client {
     public void startClient() throws IOException{
         String serverAdress= getAddress();
         Socket s = new Socket(serverAdress,port);
-
+        System.out.println("test0");
         Requete requete;
         Reponse reponse;
-
-        ObjectInputStream entree = new ObjectInputStream(s.getInputStream());
         ObjectOutputStream sortie = new ObjectOutputStream(s.getOutputStream());
+        ObjectInputStream entree = new ObjectInputStream(s.getInputStream());
+        System.out.println("test");
+
     while(true) {
         sortie.writeObject(creerRequete());
         try {
