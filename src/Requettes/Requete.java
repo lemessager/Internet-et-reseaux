@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Requete {
 
     TypeDeRequete typeDeRequete;
-    ArrayList<String> liste;
-    public Requete (TypeDeRequete tdr,ArrayList<String> l){
+    private String nom;
+    private String surnom;
+    public Requete (TypeDeRequete tdr, String nom, String surnom){
         typeDeRequete =tdr;
-        liste = l;
+        this.nom=nom;
+        this.surnom=surnom;
     }
     
 }
