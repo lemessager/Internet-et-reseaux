@@ -1,8 +1,6 @@
 package Client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
@@ -15,19 +13,40 @@ public class Client {
     static int port=1993;
     
     public Client (int port){
-        this.port=port;
+        Client.port=port;
     }
-    
 
-    public static void main(String[] args) throws IOException {
+    public void startClient() throws IOException{
         String serverAddress = JOptionPane.showInputDialog(
-            "Enter IP Address of a machine that is\n" +
-            "running the date service on port 9090:");
+                "Enter IP Address of the server : ");
         Socket s = new Socket(serverAddress,port);
+        PrintWriter out = new PrintWriter(s.getOutputStream(),true);
         BufferedReader input =
-            new BufferedReader(new InputStreamReader(s.getInputStream()));
+                new BufferedReader(new InputStreamReader(s.getInputStream()));
         String answer = input.readLine();
         JOptionPane.showMessageDialog(null, answer);
+        String message="";
+
+        message = JOptionPane.showInputDialog(
+                "Enter a message : ");
+        String line;
+        while (message != null) {
+            System.out.println("Boucle client : message = "+message);
+            out.println(message);
+            while ((line=input.readLine()) != null) {
+                System.out.println("itération");
+                System.out.println(line);
+
+            }
+            System.out.println("SORTI BOUCLE");
+            message=JOptionPane.showInputDialog(
+                    "Entrez une nouvelle requête ");
+        }
         System.exit(0);
+    }
+
+    public static void main(String[] args) throws IOException {
+        Client client = new Client(1993);
+        client.startClient();
     }
 }
