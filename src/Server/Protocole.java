@@ -30,6 +30,8 @@ public class Protocole {
                 break;
             case EDIT:
                 break;
+            case QUIT:
+                return null;
             case LIST:
                 reponse.setRequestExecuted(true);
                 reponse.setMessageReponse(donnees.list());

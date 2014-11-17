@@ -1,8 +1,9 @@
 package Requettes;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Requete {
+public class Requete implements Serializable{
 
     private TypeDeRequete typeDeRequete;
     private String nom;

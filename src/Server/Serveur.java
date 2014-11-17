@@ -33,28 +33,38 @@ public class Serveur extends Thread{
         try {
             while (true) {
                 Socket socket = listener.accept();
+
                 try {
-                    ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
                     ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
+                    ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+                    System.out.println("stream ok");
 
 
-                    reponse = new Reponse(true, "Bienvenue sur le serveur. Entrez une requête : ");
+                    reponse = new Reponse(true, "Bienvenue sur le serveur.");
                     os.writeObject((Object) reponse);
+                    try {
+                        while (true) {
 
-                    while (true) {
-                        try {
                             if ((requete = (Requete) is.readObject()) != null) {
                                 reponse = protocole.getReponse(requete);
-                                os.writeObject((Object) reponse);
+                                if (reponse != null) {
+                                    os.writeObject((Object) reponse);
+                                }
                             }
                         }
-                        catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
+                    catch (IOException e) {
+                        is.close();
+                        os.close();
+                        socket.close();
+                        System.err.println("Deconnexion du client!");
+                    }
+
                 }
+
                 catch (IOException e) {
                     System.err.println("Erreur de connexion : "+e.getMessage());
+                    System.exit(0);
                 }
                 catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -68,7 +78,9 @@ public class Serveur extends Thread{
             System.err.println("Connection error "+port);
         }
         finally {
-            listener.close();
+            if (!listener.isClosed()) {
+                listener.close();
+            }
         }
     }
 
