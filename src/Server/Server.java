@@ -21,28 +21,7 @@ public class Server extends Thread{
         try {
             while (true) {
                 Socket socket = listener.accept();
-                try {
-                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                    System.out.println(out);
-                    out.println("Bienvenue sur le port :"+listener.getLocalPort());
 
-                    System.out.println("Connexion etablie");
-
-                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    String reponse;
-                    reponse = in.readLine();
-                    System.out.println("message reçu, "+reponse);
-                    if (reponse.equals("list")) {
-                        out.println(data.list());
-                    }
-                }
-                catch (IOException e){
-                    System.err.println("Connexion terminee\n"+e.getMessage());
-
-                }
-                finally {
-                    socket.close();
-                }
             }
         }
 
