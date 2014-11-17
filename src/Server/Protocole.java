@@ -4,31 +4,37 @@ import Requettes.Reponse;
 import Requettes.Requete;
 import Requettes.TypeDeRequete;
 
-import static Requettes.TypeDeRequete.*;
-
 /**
  * Created by riana-r on 17/11/14.
  */
-public class Protocol {
-    private Data data;
-    public Protocol (Data data){
-        this.data=data;
+public class Protocole {
+    private Donnees donnees;
+
+    public Protocole(Donnees donnees){
+        this.donnees = donnees;
     }
     public Reponse getReponse (Requete requete){
         TypeDeRequete type = requete.getTypeDeRequete();
-        String surnom, nom;
+        String surnom=requete.getSurnom();
+        String nom = requete.getNom();
         Reponse reponse = new Reponse(false, "");
         switch (type){
             case GET:
                 break;
             case ADD:
+                if (donnees.add(nom, surnom)) {
+                    reponse.setRequestExecuted(true);
+                }
                 break;
             case REMOVE:
                 break;
             case EDIT:
                 break;
+            case QUIT:
+                return null;
             case LIST:
-                reponse=new Reponse(true, data.list());
+                reponse.setRequestExecuted(true);
+                reponse.setMessageReponse(donnees.list());
                 break;
         }
         return reponse;
