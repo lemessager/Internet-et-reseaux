@@ -1,4 +1,4 @@
-package Requettes;
+package ProtocoleObjet;
 
 import java.io.Serializable;
 
