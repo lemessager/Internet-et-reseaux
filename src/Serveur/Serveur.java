@@ -1,6 +1,6 @@
-package Server;
-import Requettes.Reponse;
-import Requettes.Requete;
+package Serveur;
+import ProtocoleObjet.Reponse;
+import ProtocoleObjet.Requete;
 
 import java.io.*;
 import java.net.*;
@@ -8,7 +8,7 @@ import java.net.*;
 
 public class Serveur extends Thread{
 
-    public static int port=1993;
+    public static int port=2000;
 
     private Donnees donnees;
     private Protocole protocole;
@@ -23,8 +23,11 @@ public class Serveur extends Thread{
     }
 
     private void initialiserDonnees() {
-        donnees.add("Riana Rabehasy","Riri13");
-        donnees.add("Riana Rabehasy","Jean_Jacques");
+        donnees.add("Nom1","Surnom1");
+        donnees.add("Nom1","Surnom2");
+
+        donnees.add("Nom2","Surnom1");
+        donnees.add("Nom2","Surnom2");
 
     }
 
@@ -37,10 +40,9 @@ public class Serveur extends Thread{
                 try {
                     ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
                     ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-                    System.out.println("stream ok");
 
 
-                    reponse = new Reponse(true, "Bienvenue sur le serveur.");
+                    reponse = new Reponse(true, "Bienvenue sur le serveur.",false);
                     os.writeObject((Object) reponse);
                     try {
                         while (true) {
@@ -49,7 +51,11 @@ public class Serveur extends Thread{
                                 reponse = protocole.getReponse(requete);
                                 if (reponse != null) {
                                     os.writeObject((Object) reponse);
+                                    if (reponse.deconnectedFromClient()) {
+                                        throw new IOException();
+                                    }
                                 }
+
                             }
                         }
                     }
@@ -85,7 +91,7 @@ public class Serveur extends Thread{
     }
 
     public static void main(String[] args) throws IOException {
-        Serveur server = new Serveur(1993);
+        Serveur server = new Serveur(2000);
         server.startServer();
     }
 

@@ -7,26 +7,37 @@ import java.io.Serializable;
  */
 public class Reponse implements Serializable {
     boolean requestExecuted;
-    String messageReponse;
+    String content;
+    boolean deconnectedFromClient;
 
-    public Reponse(boolean requestExecuted, String messageReponse) {
+
+    public Reponse(boolean requestExecuted, String content, boolean deconnectedFromClient) {
         this.requestExecuted = requestExecuted;
-        this.messageReponse = messageReponse;
+        this.content = content;
+        this.deconnectedFromClient=deconnectedFromClient;
     }
 
     public boolean isRequestExecuted() {
         return requestExecuted;
     }
 
-    public String getMessageReponse() {
-        return messageReponse;
+    public String getContent() {
+        return content;
+    }
+
+    public boolean deconnectedFromClient() {
+        return deconnectedFromClient;
+    }
+
+    public void setDeconnectedFromClient(boolean deconnectedFromClient) {
+        this.deconnectedFromClient = deconnectedFromClient;
     }
 
     public void setRequestExecuted(boolean requestExecuted) {
         this.requestExecuted = requestExecuted;
     }
 
-    public void setMessageReponse(String messageReponse) {
-        this.messageReponse = messageReponse;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

@@ -1,8 +1,8 @@
-package Server;
+package Serveur;
 
-import Requettes.Reponse;
-import Requettes.Requete;
-import Requettes.TypeDeRequete;
+import ProtocoleObjet.Reponse;
+import ProtocoleObjet.Requete;
+import ProtocoleObjet.TypeDeRequete;
 
 /**
  * Created by riana-r on 17/11/14.
@@ -17,7 +17,7 @@ public class Protocole {
         TypeDeRequete type = requete.getTypeDeRequete();
         String surnom=requete.getSurnom();
         String nom = requete.getNom();
-        Reponse reponse = new Reponse(false, "");
+        Reponse reponse = new Reponse(false, "",false);
         switch (type){
             case GET:
                 break;
@@ -31,10 +31,10 @@ public class Protocole {
             case EDIT:
                 break;
             case QUIT:
-                return null;
+                reponse.setDeconnectedFromClient(true);
             case LIST:
                 reponse.setRequestExecuted(true);
-                reponse.setMessageReponse(donnees.list());
+                reponse.setContent(donnees.list());
                 break;
         }
         return reponse;

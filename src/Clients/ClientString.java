@@ -1,8 +1,4 @@
-package Client;
-
-import Requettes.Reponse;
-import Requettes.Requete;
-import Requettes.TypeDeRequete;
+package Clients;
 
 import java.io.*;
 import java.net.Socket;
