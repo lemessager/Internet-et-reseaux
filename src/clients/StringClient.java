@@ -1,4 +1,4 @@
-package Clients;
+package clients;
 
 import java.io.*;
 import java.net.Socket;
@@ -8,12 +8,12 @@ import java.util.Scanner;
 /**
  * Created by Benjamin on 17/11/2014.
  */
-public class ClientString {
+public class StringClient {
 
     static int port=27645;
 
-    public ClientString (int port){
-        ClientString.port=port;
+    public StringClient(int port){
+        StringClient.port=port;
     }
 
     public String creerRequete (){
@@ -37,8 +37,8 @@ public class ClientString {
         System.out.println(serverAdress);
         try {
             Socket s = new Socket(serverAdress, port);
-            String requete;
-            String reponse;
+            String request;
+            String response;
 
             PrintWriter sortie = new PrintWriter(s.getOutputStream(),true);
             BufferedReader entree = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -49,19 +49,19 @@ public class ClientString {
 
 
             while (true) {
-                requete =creerRequete();
+                request =creerRequete();
                 sortie.print("1\nazelkazje\nazlejzaelkj\n");
                 System.out.println("requete envoye");
-                if (requete==null) {
+                if (request==null) {
                     entree.close();
                     sortie.close();
                     s.close();
                     System.exit(0);
                 }
 
-                reponse = entree.readLine();
+                response = entree.readLine();
 
-                System.out.println(reponse);
+                System.out.println(response);
 
 
             }
@@ -72,7 +72,7 @@ public class ClientString {
     }
 
     public static void main(String[] args) throws IOException {
-        ClientString clientString = new ClientString(27645);
-        clientString.startClientString();
+        StringClient stringClient = new StringClient(27645);
+        stringClient.startClientString();
     }
 }
